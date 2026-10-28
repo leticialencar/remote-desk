@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
 )
 
 from remote_desk.ui.styles import APP_STYLE
+from remote_desk.core.device import get_device_id
 
 
 class MainWindow(QMainWindow):
@@ -133,12 +134,20 @@ class MainWindow(QMainWindow):
         device_caption = QLabel("ID deste dispositivo")
         device_caption.setObjectName("eyebrow")
 
-        self.device_id = QLabel("1 150 701 316")
+        device_id = get_device_id()
+
+        formatted_id = (
+            f"{device_id[:3]} "
+            f"{device_id[3:6]} "
+            f"{device_id[6:]}"
+        )
+
+        self.device_id = QLabel(formatted_id)
         self.device_id.setObjectName("device_id")
 
         device_description = QLabel(
-            "Seu ID vai aparecer aqui quando estiver "
-            "disponível para conexão!"
+            "Compartilhe este ID com quem quer se conectar "
+            "ao seu dispositivo."
         )
         device_description.setObjectName("muted")
         device_description.setWordWrap(True)
