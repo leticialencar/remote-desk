@@ -1,6 +1,19 @@
-APP_STYLE = """
+import re
+
+FONT_SCALE = 1.2
+
+
+def _scale_fonts(style: str, scale: float) -> str:
+    def replace(match: re.Match) -> str:
+        size = int(int(match.group(1)) * scale + 0.5)
+        return f"font-size: {size}px"
+
+    return re.sub(r"font-size:\s*(\d+)px", replace, style)
+
+
+_BASE_STYLE = """
 QMainWindow {
-    background-color: #070F24;
+    background: transparent;
 }
 
 QWidget {
@@ -16,11 +29,11 @@ QLabel {
 QFrame#window_root {
     background-color: #070F24;
     border: 1px solid #16233D;
+    border-radius: 14px;
 }
 
-/* ---------- Title bar ---------- */
 QFrame#title_bar {
-    background-color: #070F24;
+    background: transparent;
     border-bottom: 1px solid #101B33;
 }
 
@@ -41,9 +54,8 @@ QPushButton#icon_button:hover {
     background-color: #111D38;
 }
 
-/* ---------- Sidebar ---------- */
 QFrame#sidebar {
-    background-color: #070F24;
+    background: transparent;
     border-right: 1px solid #101B33;
 }
 
@@ -83,7 +95,6 @@ QLabel#status_text {
     font-size: 12px;
 }
 
-/* ---------- Cards ---------- */
 QFrame#card {
     background-color: #0B1427;
     border: 1px solid #16233D;
@@ -139,7 +150,6 @@ QLabel#password {
     font-size: 20px;
     letter-spacing: 2px;
 }
-
 
 QLineEdit {
     background-color: #0D1830;
@@ -219,3 +229,6 @@ QToolTip {
     border: 1px solid #1C2B4A;
 }
 """
+
+
+APP_STYLE = _scale_fonts(_BASE_STYLE, FONT_SCALE)
