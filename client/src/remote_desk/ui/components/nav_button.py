@@ -23,6 +23,5 @@ class NavButton(QPushButton):
         self.setProperty("active", active)
         color = ICON_COLOR_ACTIVE if active else ICON_COLOR
         self.setIcon(make_icon(self._icon_name, color, ICON_SIZE))
-        # força o Qt a reaplicar o QSS com a nova propriedade
         self.style().unpolish(self)
         self.style().polish(self)

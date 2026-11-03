@@ -9,7 +9,6 @@ from remote_desk.ui.components.icon_button import IconButton
 
 
 def format_device_id(device_id: str) -> str:
-    """'123456789' -> '123 456 789'"""
     return f"{device_id[:3]} {device_id[3:6]} {device_id[6:]}".strip()
 
 
